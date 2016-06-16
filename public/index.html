@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Forcast</title>
+		<script src='//maps.googleapis.com/maps/api/js'></script>
+		<script src="javascripts/angular.min.js"></script>
+		<script src="javascripts/weatherapp.js"></script>
+		<link rel="stylesheet" href="stylesheets/style.css">
+	</head>
+	<body ng-app="weatherApp" ng-controller="mainController">
+		<img ng-hide="weatherData" class="loading-icon" width="100" height="100" src="images/loading.gif">
+		<p ng-hide="weatherData" class="loading-icon">{{loadingMsg}}</p>
+		<div id="forcast-header" ng-show="weatherData" class="today">
+			<p>Current Conditions - {{weatherData.currently.summary}}</p>
+			<img style="float: left;" src="images/{{weatherData.currently.icon}}.jpg">
+			<span>{{weatherData.currently.temperature}} degrees</span>
+			<form ng-submit="locationSearch()" >
+				<input placeholder="change location" ng-model="locationSearchString" name="locationSearchString" type="text">
+				<input type="submit" id="submit">
+			</form>
+		</div>
+		<div style="display: table;">
+			<div style="display: table-row">
+		    <div class="day" ng-repeat="day in weatherData.daily.data | limitTo:5 track by $index" ng-click="sellectDay(day.time)">
+					<p>{{dayText(day.time)}}</p>
+					<p>
+						<span class="day-low">{{day.temperatureMin}}</span> | <span class="day-high">{{day.temperatureMax}}</span>
+					</p>
+					<img class="weather-icon" src="images/{{day.icon}}.jpg">
+					<p class="summary">{{day.summary}}</p>
+		    </div>
+			</div>
+		</div>
+		<div id="weather-footer" ng-show="weatherData" class="today">
+			<p>{{today}} - {{hourlyData.summary}}</p>
+			<weather-graph />
+		</div>
+	</body>
+</html>
