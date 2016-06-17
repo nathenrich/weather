@@ -36,6 +36,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     $scope.loadingMsg = vlu;
   }
 
+  // get browsers geelocation and send to WeaherDataSource
   init = function(){
     if (navigator.geolocation) {
        navigator.geolocation.getCurrentPosition(function(position){
@@ -54,17 +55,20 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     $scope.latlong.longitude = longitude;
   }
 
+  // callback used when loading new location.
   setForecastData = function(data) {
     $scope.weatherData = data;
-    $scope.hourlyData = data.hourly;
+    $scope.sellectDay($scope.weatherData.daily.data[0])
     $scope.today = $scope.dayText(data.currently.time);
     loadMap($scope.latlong);
   }
 
+  // callback used when loading new day.
   setDayData = function(data) {
     $scope.hourlyData = data.hourly;
   }
 
+  // used to retreave nearest city name from longitude and latitude
   revearseGeocode = function(latlong) {
     var geocoder =  new google.maps.Geocoder();
     var point = new google.maps.LatLng(latlong.latitude, latlong.longitude);
@@ -84,14 +88,22 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     });
   }
 
+  // convert timestamp to day name
   $scope.dayText = function(timestamp){
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     return days[new Date(timestamp*1000).getDay()];
   }
 
-  $scope.sellectDay = function(timestamp) {
-    $scope.today = $scope.dayText(timestamp);
-    WeatherDataSource.get(setDayData, $scope.latlong, timestamp);
+  $scope.sellectDay = function(day) {
+    for(i in $scope.weatherData.daily.data){
+      if($scope.weatherData.daily.data[i] === day){
+        $scope.weatherData.daily.data[i].selected = true;
+      }else{
+        $scope.weatherData.daily.data[i].selected = false;
+      }
+    }
+    $scope.today = $scope.dayText(day.time);
+    WeatherDataSource.get(setDayData, $scope.latlong, day.time);
   }
 
   $scope.locationSearch = function() {

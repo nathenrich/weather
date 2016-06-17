@@ -1,5 +1,5 @@
 body {
-	background-color: #f9fff2;
+	background-color: #ffffff;
 	padding-top:20px;
 	padding-left:20px;
 	width: 100%;
@@ -64,7 +64,7 @@ body {
 
 .today-left-temperature{
 	position: relative;
-	font-size: xx-large;
+	font-size: 40px;
 }
 
 .today-left-data-small{
@@ -104,6 +104,20 @@ body {
 	background-color: #f2f9ff;
 	border-radius: 15px;
 	border: 2px solid #73AD21;
+	width: 100px;
+	height: 200px;
+	text-align: center;
+	cursor: pointer;
+	box-shadow: 5px 5px 10px #888888;
+	margin: auto;
+	padding-top: 5px;
+}
+
+.day-active {
+	float: left;
+	background-color: #f2f9ff;
+	border-radius: 15px;
+	border: 2px solid #CF5300;
 	width: 100px;
 	height: 200px;
 	text-align: center;

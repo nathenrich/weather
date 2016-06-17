@@ -15,9 +15,9 @@
 
 			<div id="header" class="header">
 				<img id="header-logo" src="images/logo.png" class="header-logo">
-				<form id="location-search" ng-submit="locationSearch()" class="location-search">
-					<input placeholder="change location" ng-model="locationSearchString" name="locationSearchString" type="text">
-					<input type="submit" id="submit">
+				<form id="location-search" ng-submit="locationSearch()" class="location-search form-inline">
+					<input class="form-control" placeholder="change location" ng-model="locationSearchString" name="locationSearchString" type="text">
+					<input class="btn btn-default" type="submit" id="submit" value="Submit">
 				</form>
 			</div>
 
@@ -54,7 +54,7 @@
 
 			<div id="forecast-days" class="forecast-days">
 				<div ng-repeat="day in weatherData.daily.data | limitTo:5 track by $index" >
-			    <div class="day" ng-click="sellectDay(day.time)">
+			    <div ng-click="sellectDay(day)" ng-class="day.selected && 'day-active' || 'day'">
 						<div id="day-name">{{dayText(day.time)}}</div>
 						<div id="day-temperature">
 							<span class="day-low">{{day.temperatureMin}}</span> | <span class="day-high">{{day.temperatureMax}}</span>
@@ -67,7 +67,7 @@
 			</div>
 
 			<div id="weather-footer" ng-show="weatherData" class="weather-footer">
-				<p>{{today}} - {{hourlyData.summary}}</p>
+				<p>{{today}} houry forecast - {{hourlyData.summary}}</p>
 				<weather-graph width="572" height="150"/>
 			</div>
 		</div>
