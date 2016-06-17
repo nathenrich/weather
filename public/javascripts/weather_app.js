@@ -24,6 +24,7 @@ angular.module('weatherApp.service',[]).
 weatherApp.controller('mainController', function($scope, $http, WeatherDataSource){
   $scope.loadingMsg           = "loading current location...";
   $scope.latlong              = {"latitude": null, "longitude": null}
+  $scope.date                 = new Date();
   $scope.weatherData          = null;
   $scope.hourlyData           = null;
   $scope.today                = null;
@@ -41,6 +42,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
          $scope.loadingMsg = "loading weather data...";
          setCurrentLatLng(position.coords.latitude, position.coords.longitude);
          WeatherDataSource.get(setForecastData, $scope.latlong);
+         revearseGeocode($scope.latlong);
       });
     } else {
       $scope.loadingMsg = "Geolocation is not supported by this browser.";
@@ -55,7 +57,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
   setForecastData = function(data) {
     $scope.weatherData = data;
     $scope.hourlyData = data.hourly;
-    $scope.today = dayText(data.currently.time);
+    $scope.today = $scope.dayText(data.currently.time);
     loadMap($scope.latlong);
   }
 
@@ -63,21 +65,12 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     $scope.hourlyData = data.hourly;
   }
 
-  dayText = function(timestamp){
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    return days[new Date(timestamp*1000).getDay()];
-  }
-
-  timeText = function(timestamp){
-    return new Date(timestamp*1000);
-  }
-
   revearseGeocode = function(latlong) {
+    var geocoder =  new google.maps.Geocoder();
     var point = new google.maps.LatLng(latlong.latitude, latlong.longitude);
     geocoder.geocode({ 'latLng': point }, function (results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        var address = (results[0].address_components[3].long_name + ", " + results[0].address_components[5].short_name);
-        return address;
+        $scope.locationTitle = (results[0].address_components[3].long_name + ", " + results[0].address_components[5].short_name);
       }
     });
   }
@@ -91,8 +84,13 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     });
   }
 
+  $scope.dayText = function(timestamp){
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    return days[new Date(timestamp*1000).getDay()];
+  }
+
   $scope.sellectDay = function(timestamp) {
-    $scope.today = dayText(timestamp);
+    $scope.today = $scope.dayText(timestamp);
     WeatherDataSource.get(setDayData, $scope.latlong, timestamp);
   }
 
@@ -102,8 +100,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
       if (status == google.maps.GeocoderStatus.OK) {
         setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
         WeatherDataSource.get(setForecastData, $scope.latlong);
-        $scope.locationSearchString = revearseGeocode($scope.latlong);
-        loadMap();
+        revearseGeocode($scope.latlong);
       } else {
         console.error("Something is wrong " + status);
       }

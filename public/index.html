@@ -30,10 +30,22 @@
 
 			<div id="forecast-header" ng-show="weatherData" class="today">
 				<div class="today-left">
-					<div>Current Conditions - {{locationSearchString}}
-						{{weatherData.currently.summary}}</div>
-					<img class="current-icon" src="images/1/{{weatherData.currently.icon}}.jpg">
-					<span>{{weatherData.currently.temperature}} °F</span>
+					<div>
+						<div>Current Conditions: {{locationTitle}}<br>
+							{{date | date:'shortTime'}} : {{weatherData.currently.summary}}
+						</div>
+						<img class="current-icon" src="images/1/{{weatherData.currently.icon}}.jpg">
+					</div>
+					<div style="float: right;">
+							<div style=" position: relative; font-size: xx-large;">
+								{{weatherData.currently.temperature}} °F
+							</div>
+							<div style=" position: relative; font-size: small;">
+								Feels Like {{weatherData.currently.apparentTemperature}} °F<br>
+								Wind Speed is {{weatherData.currently.windSpeed}} mph<br>
+								Chance of Rain is {{weatherData.currently.precipProbability}}%<br>
+							</div>
+					</div>
 				</div>
 				<div class="today-right">
 					<div id="googleMap" class="today-map"></div>

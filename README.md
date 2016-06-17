@@ -12,6 +12,6 @@ It's built with angular as its core view library.
 1. `npm install` within the repo directory.
    This will install all dependencies for the
    app.
-1. rename ".env.example" as "".env" and update with your Dark Sky Key.
+1. Rename ".env.example" as "".env" and update with your Dark Sky Key.
 1. `npm start` within the repo directory.
    This will start the app on `localhost:3000`.
