@@ -30,9 +30,10 @@
 
 			<div id="forcast-header" ng-show="weatherData" class="today">
 				<div class="today-left">
-					<p>Current Conditions - {{weatherData.currently.summary}}</p>
+					<div>Current Conditions - {{locationSearchString}}
+						{{weatherData.currently.summary}}</div>
 					<img class="current-icon" src="images/1/{{weatherData.currently.icon}}.jpg">
-					<span>{{weatherData.currently.temperature}} degrees</span>
+					<span>{{weatherData.currently.temperature}} °F</span>
 				</div>
 				<div class="today-right">
 					<div id="googleMap" class="today-map"></div>
