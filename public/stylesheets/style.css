@@ -56,6 +56,22 @@ body {
 	box-shadow: 5px 5px 10px #888888;
 }
 
+.today-left-data-container{
+	float: right;
+	position: relative;
+	left: -10px
+}
+
+.today-left-temperature{
+	position: relative;
+	font-size: xx-large;
+}
+
+.today-left-data-small{
+	position: relative;
+	font-size: small;
+}
+
 .today-right {
 	position:relative;
 	float: right;
