@@ -12,7 +12,6 @@
 	<body ng-app="weatherApp">
 		<div id=weatherApp  ng-controller="mainController" class="weather-app">
 
-
 			<div id="header" class="header">
 				<img id="header-logo" src="images/logo.png" class="header-logo">
 				<form id="location-search" ng-submit="locationSearch()" class="location-search form-inline">
@@ -34,7 +33,7 @@
 						<div>Current Conditions: {{locationTitle}}<br>
 							{{date | date:'shortTime'}} : {{weatherData.currently.summary}}
 						</div>
-						<img class="current-icon" ng-src="images/1/{{weatherData.currently.icon}}.jpg">
+						<img class="current-icon" ng-src="images/icons/{{weatherData.currently.icon}}_lg.png">
 					</div>
 					<div class="today-left-data-container">
 							<div class="today-left-temperature">
@@ -59,7 +58,7 @@
 						<div id="day-temperature">
 							<span class="day-low">{{day.temperatureMin}}</span> | <span class="day-high">{{day.temperatureMax}}</span>
 						</div>
-						<img id="day-icon" class="weather-icon" ng-src="images/1/{{day.icon}}.jpg">
+						<img id="day-icon" class="weather-icon" ng-src="images/icons/{{day.icon}}_sm.png">
 						<div id="day-summary" class="day-summary">{{day.summary}}</div>
 			    </div>
 					<div id="day-spacer" class="day-spacer"></div>

@@ -18,7 +18,7 @@ weatherApp.directive('weatherGraph', function() {
       ctx.fillText("midnight", width - rightMargin - ctx.measureText("midnight").width, height - bottomMargin + bottomTextOffset);
       // temp lables
       ctx.font = "11px Arial";
-      ctx.fillStyle = '#CF5300;';
+      ctx.fillStyle = '#CF5300';
       ctx.fillText("120°", 2, 10);
       ctx.fillText("60°", 9, (height - bottomMargin) / 2);
       ctx.fillText("0°", 16, height - bottomMargin);
