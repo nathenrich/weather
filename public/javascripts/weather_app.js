@@ -43,7 +43,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
          $scope.loadingMsg = "loading weather data...";
          setCurrentLatLng(position.coords.latitude, position.coords.longitude);
          WeatherDataSource.get(setForecastData, $scope.latlong);
-         revearseGeocode($scope.latlong);
+         reverseGeocode($scope.latlong);
       });
     } else {
       $scope.loadingMsg = "Geolocation is not supported by this browser.";
@@ -69,7 +69,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
   }
 
   // used to retreave nearest city name from longitude and latitude
-  revearseGeocode = function(latlong) {
+  reverseGeocode = function(latlong) {
     var geocoder =  new google.maps.Geocoder();
     var point = new google.maps.LatLng(latlong.latitude, latlong.longitude);
     geocoder.geocode({ 'latLng': point }, function (results, status) {
@@ -112,7 +112,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
       if (status == google.maps.GeocoderStatus.OK) {
         setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
         WeatherDataSource.get(setForecastData, $scope.latlong);
-        revearseGeocode($scope.latlong);
+        reverseGeocode($scope.latlong);
       } else {
         console.error("Something is wrong " + status);
       }

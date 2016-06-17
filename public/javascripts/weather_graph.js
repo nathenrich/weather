@@ -18,7 +18,7 @@ weatherApp.directive('weatherGraph', function() {
       ctx.fillText("midnight", width - rightMargin - ctx.measureText("midnight").width, height - bottomMargin + bottomTextOffset);
       // temp lables
       ctx.font = "11px Arial";
-      ctx.fillStyle = '#ff0000';
+      ctx.fillStyle = '#CF5300;';
       ctx.fillText("120°", 2, 10);
       ctx.fillText("60°", 9, (height - bottomMargin) / 2);
       ctx.fillText("0°", 16, height - bottomMargin);
@@ -44,7 +44,7 @@ weatherApp.directive('weatherGraph', function() {
     temperatureToY = function(temperature){
       var useableHeight = height - bottomMargin;
       var incrementHeight = (useableHeight / 120);
-      return useableHeight - (temperature * incrementHeight) - 10;
+      return useableHeight - (temperature * incrementHeight);
     }
 
     rainToY = function(temperature){
@@ -60,7 +60,7 @@ weatherApp.directive('weatherGraph', function() {
         init();
         var temperatureList = scope.hourlyData.data;
         ctx.beginPath();
-        ctx.strokeStyle = '#ff0000';
+        ctx.strokeStyle = '#CF5300';
         ctx.moveTo(leftMargin, temperatureToY(temperatureList[0]));
         for(i=1; i < temperatureList.length; i++){
           var x = leftMargin + hourSize * i;
