@@ -1,55 +1,145 @@
 body {
-	background-color: #f2f9ff;
+	background-color: #f9fff2;
 	padding-top:20px;
 	padding-left:20px;
-	width: 80%;
+	width: 100%;
   height: 100%;
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-a {
-	color: #00B7FF;
+.weather-app {
+	width: 600px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.loading{
+	text-align: center;
+}
+
+.header{
+	height: 75px
+}
+
+.header-logo{
+	float: left;
+	width: 150px;
+}
+
+.location-search{
+	float: right; padding-top: 12px;
+}
+
+.today {
+	position:relative;
+	background-color: #f2f9ff;
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	width: 600px;
+	height: 200px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.today-left {
+	position:absolute;
+	float: left;
+	background-color: #f2f9ff;
+	width: 320px;
+	height: 200px;
+	border-radius: 25px;
+	border: 2px solid #73AD21;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	z-index: 1;
+	top: -2px;
+	left: -2px;
+	box-shadow: 5px 5px 10px #888888;
+}
+
+.today-right {
+	position:relative;
+	float: right;
+	width: 320px;
+	height: 200px;
+	z-index: 0;
+}
+
+.today-map {
+	width:320px;
+	height:196px;
+	border-radius: 25px;
+}
+
+.current-icon{
+	float: left;
+	padding-top: 10px;
+	width: 125px;
+}
+
+.forcast-days {
+	position:relative;
+	height: 220px;
+	width: 600px;
+	padding-top: 10px;
 }
 
 .day {
-	display: table-cell;
+	float: left;
 	background-color: #f2f9ff;
 	border-radius: 15px;
 	border: 2px solid #73AD21;
-	width: 170px;
+	width: 100px;
 	height: 200px;
-	padding-top: 10px;
-	margin:5px;
 	text-align: center;
 	cursor: pointer;
+	box-shadow: 5px 5px 10px #888888;
+	margin: auto;
+}
+
+.day:hover {
+   border-color: #CF5300;
 }
 
 .day-high {
 	color: #ff0000;
+	font-size: small;
+	padding-bottom: 5px;
 }
 
 .day-low {
 	color: #0000ff;
+	font-size: small;
+	padding-bottom: 5px;
 }
 
-.summary {
+.day-summary {
+	padding-top: 5px;
 	font-size: x-small;
 }
 
-.today {
+.day-spacer {
+	float: left;
+	padding: 12.5px;
+}
+
+.weather-footer {
 	background-color: #f2f9ff;
 	border-radius: 25px;
-	border: 2px solid #73AD21;
-	width: 870px;
+	border: 2px solid #CF5300;
+	width: 600px;
 	height: 200px;
 	padding-top: 10px;
 	padding-left: 10px;
+	box-shadow: 5px 5px 10px #888888;
 }
 
 .weather-icon {
 	display: block;
   margin-left: auto;
   margin-right: auto;
+	width: 75px;
+	height: 75px;
 }
 
 .loading-icon {
@@ -60,13 +150,12 @@ a {
   margin-bottom: auto;
 }
 
-.graph {
-	border:2px solid #d3d3d3;
-	border-radius: 15px;
+.gmnoprint:not(.gm-bundled-control) {
+  display: none;
 }
-
-.angular-google-map-container {
-	float: right;
-	height: 200px;
-	width: 200px;
+.gm-bundled-control .gmnoprint {
+  display: block;
 }
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+a[href^="https://www.google.com/maps"]{display:none !important}

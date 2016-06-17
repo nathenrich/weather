@@ -1,14 +1,19 @@
+require('dotenv').config();
 var express = require('express');
+var request = require('request');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// proxy for Dark Sky API
+app.use('/weather_data', function(req, res) {
+  var url = "https://api.forecast.io/forecast/" + process.env.DARK_SKY_API_KEY + req.url.replace('/?url=','');
+  console.log(url);
+  req.pipe(request(url)).pipe(res);
+});
 
 app.use('/', routes);
 app.use('/users', users);
