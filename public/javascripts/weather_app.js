@@ -55,7 +55,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
   setForcastData = function(data) {
     $scope.weatherData = data;
     $scope.hourlyData = data.hourly;
-    $scope.today = $scope.dayText(data.currently.time);
+    $scope.today = dayText(data.currently.time);
     loadMap($scope.latlong);
   }
 
@@ -63,32 +63,13 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     $scope.hourlyData = data.hourly;
   }
 
-  $scope.dayText = function(timestamp){
+  dayText = function(timestamp){
     var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     return days[new Date(timestamp*1000).getDay()];
   }
 
-  $scope.timeText = function(timestamp){
+  timeText = function(timestamp){
     return new Date(timestamp*1000);
-  }
-
-  $scope.sellectDay = function(timestamp) {
-    $scope.today = $scope.dayText(timestamp);
-    WeatherDataSource.get(setDayData, $scope.latlong, timestamp);
-  }
-
-  $scope.locationSearch = function() {
-    var geocoder =  new google.maps.Geocoder();
-    geocoder.geocode( { 'address': $scope.locationSearchString}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
-        WeatherDataSource.get(setForcastData, $scope.latlong);
-        $scope.locationSearchString = revearseGeocode($scope.latlong);
-        loadMap();
-      } else {
-        console.error("Something is wrong " + status);
-      }
-    });
   }
 
   revearseGeocode = function(latlong) {
@@ -107,6 +88,25 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
       zoom:7,
       disableDefaultUI: true,
       styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"visibility":"on"}]},{"featureType":"administrative","elementType":"labels","stylers":[{"visibility":"on"},{"color":"#716464"},{"weight":"0.01"}]},{"featureType":"administrative.country","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"landscape","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"geometry.stroke","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"visibility":"simplified"}]},{"featureType":"poi","elementType":"labels.text.stroke","stylers":[{"visibility":"simplified"}]},{"featureType":"poi.attraction","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"simplified"},{"color":"#a05519"},{"saturation":"-13"}]},{"featureType":"road.local","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"visibility":"simplified"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"simplified"},{"color":"#84afa3"},{"lightness":52}]},{"featureType":"water","elementType":"geometry","stylers":[{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"}]}]
+    });
+  }
+
+  $scope.sellectDay = function(timestamp) {
+    $scope.today = dayText(timestamp);
+    WeatherDataSource.get(setDayData, $scope.latlong, timestamp);
+  }
+
+  $scope.locationSearch = function() {
+    var geocoder =  new google.maps.Geocoder();
+    geocoder.geocode( { 'address': $scope.locationSearchString}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
+        WeatherDataSource.get(setForcastData, $scope.latlong);
+        $scope.locationSearchString = revearseGeocode($scope.latlong);
+        loadMap();
+      } else {
+        console.error("Something is wrong " + status);
+      }
     });
   }
 
