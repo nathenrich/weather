@@ -40,7 +40,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
        navigator.geolocation.getCurrentPosition(function(position){
          $scope.loadingMsg = "loading weather data...";
          setCurrentLatLng(position.coords.latitude, position.coords.longitude);
-         WeatherDataSource.get(setForcastData, $scope.latlong);
+         WeatherDataSource.get(setForecastData, $scope.latlong);
       });
     } else {
       $scope.loadingMsg = "Geolocation is not supported by this browser.";
@@ -52,7 +52,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     $scope.latlong.longitude = longitude;
   }
 
-  setForcastData = function(data) {
+  setForecastData = function(data) {
     $scope.weatherData = data;
     $scope.hourlyData = data.hourly;
     $scope.today = dayText(data.currently.time);
@@ -101,7 +101,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     geocoder.geocode( { 'address': $scope.locationSearchString}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
-        WeatherDataSource.get(setForcastData, $scope.latlong);
+        WeatherDataSource.get(setForecastData, $scope.latlong);
         $scope.locationSearchString = revearseGeocode($scope.latlong);
         loadMap();
       } else {

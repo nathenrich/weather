@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Weather Forcast</title>
+		<title>Weather Forecast</title>
 		<script src='//maps.googleapis.com/maps/api/js?key=AIzaSyDwCrwMf-2gpEHgSgTW6bV2XzrKGfY7aMU'></script>
 		<script src="javascripts/angular.min.js"></script>
 		<script src="javascripts/weather_app.js"></script>
@@ -28,7 +28,7 @@
 				<p class="loading-icon">{{loadingMsg}}</p>
 			</div>
 
-			<div id="forcast-header" ng-show="weatherData" class="today">
+			<div id="forecast-header" ng-show="weatherData" class="today">
 				<div class="today-left">
 					<div>Current Conditions - {{locationSearchString}}
 						{{weatherData.currently.summary}}</div>
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 
-			<div id="forcast-days" class="forcast-days">
+			<div id="forecast-days" class="forecast-days">
 				<div ng-repeat="day in weatherData.daily.data | limitTo:5 track by $index" >
 			    <div class="day" ng-click="sellectDay(day.time)">
 						<div id="day-name">{{dayText(day.time)}}</div>
