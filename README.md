@@ -2,12 +2,13 @@
 
 This repo houses a weather forecast app.
 It displays the next five days forecast as well as hourly data for the selected day.
+the initial location is loaded from your browser.  After loading, user can search for other locations by location name.
 
-It's built with [angular][angular] as its core view library.
+It's built with angular as its core view library.
 
 ## Getting started
 
-1. Ensure you have [node and npm][node] available.
+1. Ensure you have node and npm available.
 1. `npm install` within the repo directory.
    This will install all dependencies for the
    app.
