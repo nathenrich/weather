@@ -108,7 +108,6 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     geocoder.geocode( { 'address': $scope.locationSearchString}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
-        console.log(results);
         WeatherDataSource.get(setForecastData, $scope.latlong);
         $scope.locationTitle = (results[0].address_components[0].long_name + ", " + results[0].address_components[1].short_name);
       } else {
