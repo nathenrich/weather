@@ -96,11 +96,7 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
 
   $scope.sellectDay = function(day) {
     for(i in $scope.weatherData.daily.data){
-      if($scope.weatherData.daily.data[i] === day){
-        $scope.weatherData.daily.data[i].selected = true;
-      }else{
-        $scope.weatherData.daily.data[i].selected = false;
-      }
+      $scope.weatherData.daily.data[i].selected = $scope.weatherData.daily.data[i] === day;
     }
     $scope.today = $scope.dayText(day.time);
     WeatherDataSource.get(setDayData, $scope.latlong, day.time);
@@ -111,8 +107,9 @@ weatherApp.controller('mainController', function($scope, $http, WeatherDataSourc
     geocoder.geocode( { 'address': $scope.locationSearchString}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         setCurrentLatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng())
+        console.log(results);
         WeatherDataSource.get(setForecastData, $scope.latlong);
-        reverseGeocode($scope.latlong);
+        $scope.locationTitle = (results[0].address_components[0].long_name + ", " + results[0].address_components[1].short_name);
       } else {
         console.error("Something is wrong " + status);
       }
