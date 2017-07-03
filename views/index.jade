@@ -1,5 +1,13 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html(lang='en')
+  head
+    title= title
+  //- body(ng-app="myapp" ng-controller="myctrl")
+  body(ng-app="myapp")
+    label Name:
+    input(type="text" ng-model="name" placeholder="Enter a name here")
+    hr
+    h1 Hello {{name}}
+      
+    script(src='//maps.googleapis.com/maps/api/js?key=AIzaSyDwCrwMf-2gpEHgSgTW6bV2XzrKGfY7aMU')
+    script(src='javascripts/bundle.js')

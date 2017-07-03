@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Forecast</title>
+		<link rel="stylesheet" href="stylesheets/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
+		<script src="javascripts/weather.js"></script>
+		<script>
+			$(function(){
+				var weather = new Weather();
+				weather.init();
+			})
+		</script>
+	</head>
+	<body>
+		<div class="header">header</div>
+    <div class="w-container">
+			<div class="w-head">head</div>
+			<div class="w-week" id="w-week">
+				<template id="w-day">
+					<div class="w-day">
+						<div>{{time}}</div>
+						<div>
+							<span class="day-low">{{temperatureMin}}</span> | <span class="day-high">{{temperatureMax}}</span>
+						</div>
+					</div>
+				</template>
+			</div>
+			<div class="w-graph">graph</div>
+    </div>
+  </body>
+</html>

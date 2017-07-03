@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+  body
+    div(class='header') header
+    div(class='w-container')
+      div(class='w-head') head
+      div(class='w-week', id='w-week')
+        template(id='w-day')
+          div(class='w-day')
+            div{{time}}
+            div
+              span(class='day-low'){{temperatureMin}} | 
+              span(class='day-high'){{temperatureMax}}
+      div(class='w-graph') graph
+      div(class='redrum') hello this should be red
+    script(src='javascripts/bundle.js')

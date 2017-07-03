@@ -1,0 +1,55 @@
+body {}
+
+.header {
+  background-color: green;
+}
+
+.w-container {
+  max-width: 600px;
+  background-color: red;
+  border: 1px solid black;
+  margin-right: auto;
+  margin-left: auto;
+  display: none;
+}
+
+.w-head {
+  background-color: red;
+}
+
+.w-week {
+  display: flex;
+  background-color: green;
+  text-align: justify;
+  justify-content: space-between;
+}
+
+.w-day {
+  background-color: yellow;
+  width: 100px;
+  height: 200px;
+  text-align: center;
+}
+
+.w-graph {
+  background-color: blue;
+}
+
+@media screen and (max-width: 600px) {
+  .w-week {
+    flex-direction: column;
+  }
+
+  .w-day {
+    background-color: yellow;
+    width: 300px;
+    height: 200px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .w-week {
+    flex-direction: column;
+  }
+}

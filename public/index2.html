@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Forecast</title>
+	</head>
+	<body ng-app="weatherApp">
+		<div id=weatherApp  ng-controller="mainController" class="weather-app">
+
+			<div id="header" class="header">
+				<img id="header-logo" src="images/logo.png" class="header-logo">
+				<form id="location-search" ng-submit="locationSearch()" class="location-search form-inline">
+					<input class="form-control" placeholder="change location" ng-model="locationSearchString" name="locationSearchString" type="text">
+					<input class="btn btn-default" type="submit" id="submit" value="Submit">
+				</form>
+			</div>
+
+			<div id="loading" ng-hide="weatherData" class="loading">
+				<br>
+				<img class="loading-icon" width="100" height="100" src="images/loading.gif">
+				<br>
+				<p class="loading-icon">{{loadingMsg}}</p>
+			</div>
+
+			<div id="forecast-header" ng-show="weatherData" class="today">
+				<div class="today-left">
+					<div>
+						<div>Current Conditions: {{locationTitle}}<br>
+							{{date | date:'shortTime'}} : {{weatherData.currently.summary}}
+						</div>
+						<img class="current-icon" ng-src="images/icons/{{weatherData.currently.icon}}_lg.png">
+					</div>
+					<div class="today-left-data-container">
+							<div class="today-left-temperature">
+								{{weatherData.currently.temperature}} °F
+							</div>
+							<div class="today-left-data-small">
+								Feels Like {{weatherData.currently.apparentTemperature}} °F<br>
+								Wind Speed is {{weatherData.currently.windSpeed}} mph<br>
+								Chance of Rain is {{weatherData.currently.precipProbability}}%<br>
+							</div>
+					</div>
+				</div>
+				<div class="today-right">
+					<div id="googleMap" class="today-map"></div>
+				</div>
+			</div>
+
+			<div id="forecast-days" class="forecast-days">
+				<div ng-repeat="day in weatherData.daily.data | limitTo:5 track by $index" >
+			    <div ng-click="sellectDay(day)" ng-class="day.selected && 'day-active' || 'day'">
+						<div id="day-name">{{dayText(day.time)}}</div>
+						<div id="day-temperature">
+							<span class="day-low">{{day.temperatureMin}}</span> | <span class="day-high">{{day.temperatureMax}}</span>
+						</div>
+						<img id="day-icon" class="weather-icon" ng-src="images/icons/{{day.icon}}_sm.png">
+						<div id="day-summary" class="day-summary">{{day.summary}}</div>
+			    </div>
+					<div id="day-spacer" class="day-spacer"></div>
+				</div>
+			</div>
+
+			<div id="weather-footer" ng-show="weatherData" class="weather-footer">
+				<p>{{today}} houry forecast - {{hourlyData.summary}}</p>
+				<weather-graph width="572" height="150"/>
+			</div>
+		</div>
+		<script src='//maps.googleapis.com/maps/api/js?key=AIzaSyDwCrwMf-2gpEHgSgTW6bV2XzrKGfY7aMU'></script>
+		<!-- <script src="javascripts/angular.min.js"></script> -->
+		<script src="javascripts/weather_app.js"></script>
+		<script src="javascripts/bundle.js"></script>
+		<link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+	</body>
+</html>

@@ -1,0 +1,53 @@
+body{
+}
+
+.header{
+  background-color: green;
+}
+
+.w-container {
+  max-width: 600px;
+  background-color: red;
+  border: 1px solid black;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.w-head{
+  background-color: red;
+}
+
+.w-week{
+  background-color: green;
+  display: flex;
+  justify-content: space-between;
+}
+
+.w-day{
+  background-color: yellow;
+  width: 100px;
+  height:200px;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.w-graph{
+  background-color: blue;
+}
+
+@media screen and (max-width: 600px) {
+  .w-container {
+    max-width: 300px;
+  }
+
+  .w-week{
+    display: block;
+  }
+
+  .w-day{
+    width: 300px;
+    height:100px;
+    display: block;
+  }
+}

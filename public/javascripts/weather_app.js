@@ -1,6 +1,4 @@
-var weatherApp = angular.module('weatherApp', ['weatherApp.service'])
-  .run(function($rootScope) {
-});
+
 
 angular.module('weatherApp.service',[]).
   factory('WeatherDataSource', ['$http',function($http){

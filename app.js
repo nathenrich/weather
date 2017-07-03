@@ -10,6 +10,7 @@ var cors = require('cors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var newlayout = require('./routes/newlayout')
 
 var app = express();
 
@@ -30,12 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // proxy for Dark Sky API
 app.use('/weather_data', function(req, res) {
   var url = "https://api.forecast.io/forecast/" + process.env.DARK_SKY_API_KEY + req.url.replace('/?url=','');
-  console.log(url);
   req.pipe(request(url)).pipe(res);
 });
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/newlayout', newlayout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
